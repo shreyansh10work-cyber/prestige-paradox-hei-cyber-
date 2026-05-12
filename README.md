@@ -1,7 +1,7 @@
 # The Prestige Paradox: Media-Driven Distortion in Higher Education Cyber Threat Visibility
 
 **Author:** [Shreyansh Chaudhary]  
-**Student ID:** [001487390]  
+**Student ID:** [001487390 ]  
 **Programme:** MSc Business Analytics, University of Greenwich  
 **Module:** BUSI1783 – Business Analytics Project  
 **Supervisor:** [Dr Raunak Mishra]  
