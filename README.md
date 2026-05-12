@@ -1,10 +1,10 @@
 # The Prestige Paradox: Media-Driven Distortion in Higher Education Cyber Threat Visibility
 
-**Author:** [Your Name]  
-**Student ID:** [Your Student ID]  
+**Author:** [Shreyansh Chaudhary]  
+**Student ID:** [001487390]  
 **Programme:** MSc Business Analytics, University of Greenwich  
 **Module:** BUSI1783 – Business Analytics Project  
-**Supervisor:** [Your Supervisor's Name]  
+**Supervisor:** [Dr Raunak Mishra]  
 
 ## Overview
 This repository contains the complete code and data for the dissertation project investigating the "prestige paradox" in global media reporting of cyberattacks on universities. The study tests whether research-intensive institutions appear more frequently in GDELT‑captured cyber incident news than less research‑intensive ones, and how this pattern varies across geographic regions (2020‑2024).
