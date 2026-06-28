@@ -118,3 +118,38 @@ The notebook was developed in Python 3. The following libraries are required:
 - matplotlib
 - seaborn
 - google-cloud-bigquery
+
+
+
+---
+
+## Notes
+
+- The minimum frequency filter (Stage 6) introduces left-truncation bias. Only universities 
+  with three or more cybersecurity media mentions across the study period are included. 
+  The regression estimates the prestige effect within this media-visible subsample.
+
+- cited_by_count is all-time cumulative as of June 2025, not bounded to 2020–2024.
+
+- GDELT's English-language media bias means non-Anglophone universities are 
+  systematically under-represented. Geographic generalisability is limited accordingly.
+
+- The dependent variable measures cybersecurity media salience — frequency of 
+  institutional appearance in cybersecurity-themed articles — not confirmed attack 
+  victimisation.
+
+---
+
+## Citation
+
+Panwar, N. (2026) *The Prestige Paradox: Institutional Bibliometric Status and Cybersecurity 
+Media Salience in Global Higher Education, 2020–2024.* MSc Dissertation, University of 
+Greenwich, BUSI 1783.
+
+---
+
+## Licence
+
+This repository is shared for academic assessment purposes under the University of 
+Greenwich BUSI 1783 module requirements. The dataset is derived from GDELT (open 
+research use) and OpenAlex (CC0). All original analytical code is the work of the author.
