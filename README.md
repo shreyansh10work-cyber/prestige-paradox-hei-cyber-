@@ -1,6 +1,6 @@
 # The Prestige Paradox: Institutional Bibliometric Status and Cybersecurity Media Salience in Global Higher Education, 2020–2024
 
-**Author:** Nikita Panwar  
+**Author:** Shreyansh Chaudhary
 **Programme:** MSc Business Analytics  
 **Institution:** University of Greenwich  
 **Module:** BUSI 1783 — Business Analytics Project  
