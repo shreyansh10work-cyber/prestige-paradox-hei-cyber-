@@ -110,3 +110,18 @@ Pseudo R² = 0.0750. N = 741 universities.
 ## Python Environment
 
 The notebook was developed in Python 3. The following libraries are required:
+pandas
+
+numpy
+
+statsmodels
+
+thefuzz
+
+requests
+
+matplotlib
+
+seaborn
+
+google-cloud-bigquery
