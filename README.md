@@ -3,7 +3,7 @@
 **Author:** Shreyansh Chaudhary
 **Programme:** MSc Business Analytics  
 **Institution:** University of Greenwich  
-**Module:** BUSI 1783 — Business Analytics Project  
+**Module:** BUSI 1783 - Business Analytics Project  
 **Supervisor:** Dr. Raunak Mishra  
 **Submission Date:** August 2026  
 
@@ -13,7 +13,7 @@
 
 This repository contains the dataset and analytical notebook for my MSc Business Analytics 
 dissertation. The study investigates whether a 'prestige paradox' exists in global 
-cybersecurity media coverage of higher education institutions — specifically, whether 
+cybersecurity media coverage of higher education institutions - specifically, whether 
 research-heavy universities measured by bibliometric citation counts receive 
 disproportionately higher cybersecurity news coverage than research-light institutions.
 
