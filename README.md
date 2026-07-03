@@ -142,7 +142,7 @@ The notebook was developed in Python 3. The following libraries are required:
 
 ## Citation
 
-Panwar, N. (2026) *The Prestige Paradox: Institutional Bibliometric Status and Cybersecurity 
+Chaudhary, S. (2026) *The Prestige Paradox: Institutional Bibliometric Status and Cybersecurity 
 Media Salience in Global Higher Education, 2020–2024.* MSc Dissertation, University of 
 Greenwich, BUSI 1783.
 
