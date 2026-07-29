@@ -1,221 +1,104 @@
-# The Prestige Paradox: Institutional Bibliometric Status and Cybersecurity Media Salience in Global Higher Education, 2020 - 2024
+# The Prestige Paradox
 
-**Author:** Shreyansh Chaudhary  
-**Student ID:** 001487390  
-**Programme:** MSc Business Analytics  
-**Institution:** University of Greenwich  
-**Module:** BUSI 1783 - Business Analytics Project  
-**Supervisor:** Dr Raunak Mishra  
-**Submission Date:** August 2026
+**Institutional Bibliometric Status and Cybersecurity Media Salience in Global Higher Education, 2020–2024**
 
 ---
 
-## Project Overview
-
-This repository contains the dataset and analytical code for my MSc Business Analytics
-dissertation. The study investigates whether a 'prestige paradox' exists in global
-cybersecurity media coverage of higher education institutions - specifically, whether
-research-heavy universities measured by bibliometric citation counts receive
-disproportionately higher cybersecurity news coverage than research-light institutions.
-
-A novel dataset of **741 universities across 67 countries** was constructed from
-552,860 raw GDELT rows and merged with OpenAlex bibliometric data. Negative Binomial
-regression models the relationship between institutional prestige and cybersecurity
-media salience between 2020 and 2024.
-
-**Primary finding:** each one-unit increase in log-transformed citation count is
-associated with **20.7% more cybersecurity media mentions**
-(IRR = 1.207, 95% CI: 1.185–1.23, p < 0.0001),
-controlling for country fixed effects.
-
-**Important qualification:** the dependent variable measures cybersecurity *media salience*
-— the frequency of institutional appearance in cybersecurity-themed articles — **not**
-confirmed attack victimisation. GDELT's V2Themes tags are document-level, so a university
-quoted as an expert source is counted identically to a victim.
+**Author:** Shreyansh Chaudhary
+**Student ID:** 001487390
+**Programme:** MSc Business Analytics
+**Institution:** University of Greenwich
+**Module:** BUSI 1783 — Business Analytics Project
+**Supervisor:** Dr Raunak Mishra
+**Submission:** August 2026
 
 ---
 
-## Reproducing the results
+## Overview
 
-```bash
-pip install pandas numpy statsmodels thefuzz requests matplotlib seaborn scipy
-python project.py
-```
+This repository holds the dataset and analytical code for my MSc Business Analytics dissertation. The study asks whether a **prestige paradox** exists in global cybersecurity news coverage of universities: do research-heavy institutions, measured by bibliometric citation counts, appear in cybersecurity journalism more often than research-light ones?
 
-`project.py` is the single source of truth. It reads the pre-merge 742-row file,
-removes the validated false merge, rebuilds the analytical dataset, runs every model,
-and writes `results_manifest.json` containing every statistic reported in the
-dissertation. No number appears in the dissertation that is not emitted by this script.
+A dataset of **741 universities across 67 countries** was built from **552,860 raw GDELT rows** and merged with OpenAlex bibliometric data. A **Negative Binomial regression** models the relationship between institutional prestige and cybersecurity media salience over 2020–2024.
 
----
+**Headline result:** each one-unit increase in log-transformed citation count is associated with **20.7% more cybersecurity media mentions** (IRR = 1.207, 95% CI: 1.185–1.230, p < 0.0001), controlling for country fixed effects.
+
+**What the outcome actually measures.** The dependent variable is cybersecurity media *salience* — how often an institution shows up in cybersecurity-themed articles — **not** confirmed attack victimisation. GDELT's V2Themes tags are document-level, so a university quoted as an expert source counts the same as one that was breached. This distinction is maintained throughout the analysis.
+
+## Key findings
+
+- **Prestige predicts salience.** The citation effect is positive, highly significant, and stable across four converging optimisers (BFGS, L-BFGS, Powell, Conjugate Gradient).
+- **Not a perfect rank-ordering.** Oxford leads on mentions (155) despite not holding the top citation count; Harvard has the highest citations in the sample but ranks 9th on mentions. The effect is probabilistic, consistent with a Matthew-effect continuum rather than a clean elite/non-elite split.
+- **Geographically concentrated.** The US contributes 385 of 741 universities (52.0%), partly reflecting GDELT's English-language media bias. No individual country dummy is statistically significant.
+- **Honestly bounded.** The 3+ minimum-frequency filter left-truncates the sample, so the headline IRR most plausibly *overstates* the true population effect. The robustness check adding research volume fails to converge because of near-perfect collinearity (r = 0.985), leaving the impact-vs-volume question genuinely unresolved.
 
 ## Repository contents
 
 | File | Description |
-|---|---|
-| `project.py` | Full analytical pipeline. Single source of truth for all reported numbers. |
-| `Project.ipynb` | Exploratory notebook covering the GDELT BigQuery extraction and cleaning stages. |
-| `prestige_paradox_742_universities_raw.csv` | Pre-merge output (742 rows), retained for transparency. Includes the `He University` false merge. |
-| `prestige_paradox_dataset_741.csv` | **Final analytical dataset** (741 rows). This is the file used for every result. |
-| `results_manifest.json` | Machine-readable record of every reported statistic. |
-| `regression_results.txt` | Full model summaries (main + robustness). |
-| `optimizer_stability.txt` | Optimiser comparison output. |
-| `figures/` | Figures generated by `project.py`. |
+|------|-------------|
+| `Codebook.ipynb` | Main analytical notebook: GDELT extraction, cleaning, OpenAlex merge, regression, and figures. |
+| `Codebook 2.0.ipynb` | Revised / extended notebook. |
+| `gdelt_cleaned_dataset.csv` | Cleaned GDELT event dataset. |
+| `prestige_paradox_dataset_741.csv` | Final 741-university analytical dataset used for every reported result. |
 | `README.md` | This file. |
 
-### Why 742 and 741?
-
-The fuzzy merge at threshold 90 collapsed seven unrelated GDELT name-fragments
-(`Citizen Lab Of The University Of Toronto`, `Regents Of The University Of California`,
-`University The`, and others) onto a single OpenAlex record, **He University**, attributing
-32 spurious events to it. This false merge was identified through manual validation
-and removed. The analytical N is therefore **741**, and the pre-merge file
-(742 rows) is kept only for transparency.
-
-An earlier merge threshold of 80 produced additional false matches and was rejected in
-favour of 90.
-
----
-
-## Data sources
-
-**GDELT 2.0 Global Knowledge Graph (GKG)**
-- Source: Google BigQuery — `gdelt-bq.gdeltv2.gkg_partitioned`
-- Query period: 1 January 2020 – 31 December 2024
-- Access date: June 2025
-- Licence: open research use
-- Raw extraction: 552,860 rows filtered for HEI keywords and cybersecurity themes
-- After the seven-stage cleaning pipeline: 11,903 records across 1,280 unique names
-- URL: https://www.gdeltproject.org
-
-**OpenAlex Bibliometric Database**
-- Source: OpenAlex REST API — https://api.openalex.org/institutions
-- Variables used: `cited_by_count`, `works_count`, `country_code`, institution `type`
-- Licence: CC0
-- Access date: June 2025
-- URL: https://openalex.org
-
-### Reconciling 11,903 and 10,265
-
-11,903 is the count of cleaned GDELT events across all 1,280 pre-merge university names.
-The final dataset contains **10,265 events**, because it retains only the 741 universities
-successfully matched to OpenAlex. The difference belongs to the 300 unmatched universities
-and the removed He University false merge.
-
----
-
-## Dataset variables (`prestige_paradox_dataset_741.csv`)
+## Final dataset variables (`prestige_paradox_dataset_741.csv`)
 
 | Column | Description |
-|---|---|
+|--------|-------------|
 | `the_official_name` | Institution name as matched in OpenAlex |
 | `gdelt_name` | Original GDELT name(s) merged into this record (`;`-separated) |
-| `cyber_news_count` | GDELT cybersecurity media mentions, 2020–2024 (**dependent variable**) |
+| `cyber_news_count` | GDELT cybersecurity media mentions, 2020–2024 (dependent variable) |
 | `cited_by_count` | Cumulative OpenAlex citation count (raw) |
 | `works_count` | Total published works indexed in OpenAlex |
-| `log_cited_by_count` | log(cited_by_count + 1) — **primary independent variable** |
-| `log_works_count` | log(works_count + 1) |
+| `log_cited_by_count` | `log(cited_by_count + 1)` — primary independent variable |
+| `log_works_count` | `log(works_count + 1)` |
 | `country` | ISO two-letter country code |
 | `match_score` | Fuzzy match score against OpenAlex (≥ 90) |
 | `prestige_tier` | Elite / High / Medium / Low, by `cited_by_count` thresholds |
 
----
+## Method in brief
 
-## Analytical pipeline
+1. **GDELT BigQuery extraction** — `gdelt-bq.gdeltv2.gkg_partitioned`, 1 Jan 2020 – 31 Dec 2024, filtered for HEI and cybersecurity keywords (552,860 rows).
+2. **Seven-stage cleaning pipeline** — noise removal → HEI keyword filter → cyber URL filter → URL deduplication → 7-day event-window deduplication → 3+ minimum-frequency filter, ending at 11,903 records across 1,280 unique names.
+3. **OpenAlex fuzzy merge** at threshold 90/100. An earlier threshold of 80 produced false merges (notably the *He University* collapse of unrelated name-fragments), which were caught by manual validation and removed.
+4. **Modelling** — Negative Binomial regression (overdispersion ratio = 22.81 rules out Poisson), with 20 country dummies and log-citation count as the primary predictor.
+5. **Robustness** — five-optimiser stability check plus a collinearity-affected specification adding `log_works_count`.
 
-1. GDELT BigQuery extraction (552,860 rows)
-2. Noise removal — hospitals, health networks, person names, fragments, place names, generics
-3. HEI keyword filter — university / college / polytechnic
-4. Cybersecurity URL filter (67,619 rows)
-5. URL deduplication (67,471 rows)
-6. Seven-day event window deduplication (25,038 rows)
-7. Minimum frequency filter, 3+ mentions (11,903 rows / 1,280 names)
-8. OpenAlex API querying and fuzzy matching at threshold 90/100
-9. Manual validation — He University false merge removed → **741 universities**
-10. Descriptive statistics, prestige tier analysis, visualisations
-11. Negative Binomial regression — primary model (BFGS)
-12. Optimiser stability check across five algorithms
-13. Robustness specification including `log_works_count`
+## Why 741 and not 742
 
----
+The pre-merge file had 742 rows. Manual validation identified one false merge — seven unrelated GDELT name-fragments collapsed onto a single OpenAlex record (*He University*), attributing 32 spurious events to it. Removing it gives the analytical **N = 741**.
 
-## Key results
+## Reconciling 11,903 vs 10,265 events
 
-**Descriptive statistics (N = 741)**
+11,903 is the cleaned event count across all 1,280 pre-merge names. The final dataset holds 10,265 events, keeping only the 741 universities that matched to OpenAlex. The difference belongs to the 300 unmatched names and the removed *He University* merge.
 
-| Variable | Mean | SD | Min | Median | Max |
-|---|---|---|---|---|---|
-| `cyber_news_count` | 13.85 | 17.78 | 3 | 7 | 155 |
-| `cited_by_count` | 6,050,000 | 12,696,725 | 93 | 867,170 | 143,061,250 |
-| `log_cited_by_count` | 13.23 | 2.95 | 4.54 | 13.67 | 18.78 |
+## Data sources
 
-Overdispersion ratio (variance/mean) = **22.81**, confirming Negative Binomial over Poisson.
+**GDELT 2.0 Global Knowledge Graph** — Google BigQuery (`gdelt-bq.gdeltv2.gkg_partitioned`), 2020–2024, accessed June 2025, open research use. https://www.gdeltproject.org
 
-**Model specification.** The 67 countries are grouped into 21 categories
-(those with fewer than 5 universities pooled as `Other`), giving **20 country dummies**
-with `AE` as the omitted reference. No country dummy is individually
-significant (smallest p = 0.087).
+**OpenAlex** — REST API (`https://api.openalex.org/institutions`); variables: `cited_by_count`, `works_count`, `country_code`, institution type. CC0 licence, accessed June 2025. https://openalex.org
 
-**Optimiser stability**
+## Environment
 
-| Optimiser | Converged | Coefficient | IRR | p-value |
-|---|---|---|---|---|
-| BFGS               | Yes | 0.1882 | 1.2071 | < 0.0001 |
-| LBFGS              | Yes | 0.1883 | 1.2072 | < 0.0001 |
-| POWELL             | Yes | 0.1883 | 1.2072 | < 0.0001 |
-| CG                 | Yes | 0.1882 | 1.2071 | < 0.0001 |
-| NM                 | No  | 0.1928 | 1.2127 | < 0.0001 |
+Python 3. Required: `pandas`, `numpy`, `statsmodels`, `thefuzz`, `requests`, `matplotlib`, `seaborn`, `scipy`, `google-cloud-bigquery`.
 
-Main model: N = 741, Pseudo R² = 0.07499, alpha = 0.4719 (p < 0.0001),
-log-likelihood = -2503.6, LLR p = 5.47e-73.
-
-**Robustness check.** Adding `log_works_count` causes **non-convergence**
-(converged = False) because log_cited_by_count and log_works_count correlate at
-**r = 0.985**. In that specification log_cited_by_count remains significant
-(coef = 0.1752, SE = 0.06, p = 0.004, IRR = 1.192) and log_works_count
-is not (p = 0.825). A non-converged model has unreliable standard errors by
-construction and **cannot** be read as confirming robustness. Whether the effect is driven by
-research impact, research volume, or both **remains unresolved by these data**.
-
-**Chi-square test.** Reported for transparency only: statistic = 0.0, p = 1.0.
-It is uninformative by construction — the 3+ frequency filter means every university has
-events, so the binary outcome has no variation.
-
----
+```bash
+pip install pandas numpy statsmodels thefuzz requests matplotlib seaborn scipy google-cloud-bigquery
+```
 
 ## Known limitations
 
-- **Left-truncation bias.** The 3+ minimum frequency filter admits only media-visible
-  universities. Low-citation institutions that survive it are an unusually newsworthy subset,
-  so the estimated prestige gradient is steeper than the population gradient. The IRR of
-  1.207 therefore most plausibly **overstates** the true effect.
-- **300 unmatched universities** (23.4% of the 1,280 pre-merge names) are excluded. The
-  direction of this bias **cannot be verified**: OpenAlex country codes exist only for matched
-  institutions, and the excluded names are a mix of plausibly non-Western institutions and
-  unresolvable English-language fragments.
-- **GDELT English-language bias** means non-Anglophone universities are under-represented
-  (US = 385, 52.0% of the sample). Geographic generalisability is limited.
-- **`cited_by_count` is all-time cumulative** as of June 2025, not bounded to 2020–2024.
-- **Cross-sectional design** — causal direction cannot be established.
-- **Pseudo R² = 0.07499** — prestige and country explain roughly 7.5% of deviance.
-
----
-
-## Python environment
-
-Python 3. Required: `pandas`, `numpy`, `statsmodels`, `thefuzz`, `requests`,
-`matplotlib`, `seaborn`, `scipy`, `google-cloud-bigquery`.
-
----
+- **Left-truncation bias** — the 3+ frequency filter admits only media-visible universities, so the estimated prestige gradient likely overstates the population effect.
+- **300 unmatched universities (23.4%)** excluded at the merge stage; direction of the resulting bias cannot be verified from the available data.
+- **GDELT English-language bias** — non-Anglophone institutions are under-represented.
+- **Cumulative citations** — `cited_by_count` is all-time as of June 2025, not bounded to 2020–2024.
+- **Cross-sectional design** — no causal direction can be established.
+- **Pseudo R² = 0.075** — prestige and country explain roughly 7.5% of deviance.
 
 ## Citation
 
-Chaudhary, S. (2026) *The Prestige Paradox: Institutional Bibliometric Status and
-Cybersecurity Media Salience in Global Higher Education, 2020–2024.* MSc Dissertation,
-University of Greenwich, BUSI 1783.
+Chaudhary, S. (2026) *The Prestige Paradox: Institutional Bibliometric Status and Cybersecurity Media Salience in Global Higher Education, 2020–2024.* MSc Dissertation, University of Greenwich, BUSI 1783.
 
 ## Licence
 
-Shared for academic assessment under University of Greenwich BUSI 1783 module
-requirements. Data derived from GDELT (open research use) and OpenAlex (CC0).
-All original analytical code is the work of the author.
+Shared for academic assessment under University of Greenwich BUSI 1783 module requirements. Data derived from GDELT (open research use) and OpenAlex (CC0). All original analytical code is the work of the author.
