@@ -28,7 +28,7 @@ A dataset of **741 universities across 67 countries** was built from **552,860 r
 
 - **Prestige predicts salience.** The citation effect is positive, highly significant, and stable across four converging optimisers (BFGS, L-BFGS, Powell, Conjugate Gradient).
 - **Not a perfect rank-ordering.** Oxford leads on mentions (155) despite not holding the top citation count; Harvard has the highest citations in the sample but ranks 9th on mentions. The effect is probabilistic, consistent with a Matthew-effect continuum rather than a clean elite/non-elite split.
-- **Geographically concentrated.** The US contributes 385 of 741 universities (52.0%), partly reflecting GDELT's English-language media bias. No individual country dummy is statistically significant.
+- **Geographically concentrated.** The US contributes 385 of 741 universities (51.9%), partly reflecting GDELT's English-language media bias. No individual country dummy is statistically significant.
 - **Honestly bounded.** The 3+ minimum-frequency filter left-truncates the sample, so the headline IRR most plausibly *overstates* the true population effect. The robustness check adding research volume fails to converge because of near-perfect collinearity (r = 0.985), leaving the impact-vs-volume question genuinely unresolved.
 
 ## Repository contents
