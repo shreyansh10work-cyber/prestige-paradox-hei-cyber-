@@ -59,7 +59,7 @@ A dataset of **741 universities across 67 countries** was built from **552,860 r
 ## Method in brief
 
 1. **GDELT BigQuery extraction** — `gdelt-bq.gdeltv2.gkg_partitioned`, 1 Jan 2020 – 31 Dec 2024, filtered for HEI and cybersecurity keywords (552,860 rows).
-2. **Seven-stage cleaning pipeline** — noise removal → HEI keyword filter → cyber URL filter → URL deduplication → 7-day event-window deduplication → 3+ minimum-frequency filter, ending at 11,903 records across 1,280 unique names.
+2. **Eight-stage cleaning pipeline** — Raw data → noise removal → HEI keyword filter → cyber URL filter → URL deduplication → 7-day event-window deduplication → 3+ minimum-frequency filter, ending at 11,903 records across 1,280 unique names.
 3. **OpenAlex fuzzy merge** at threshold 90/100. An earlier threshold of 80 produced false merges (notably the *He University* collapse of unrelated name-fragments), which were caught by manual validation and removed.
 4. **Modelling** — Negative Binomial regression (overdispersion ratio = 22.81 rules out Poisson), with 20 country dummies and log-citation count as the primary predictor.
 5. **Robustness** — five-optimiser stability check plus a collinearity-affected specification adding `log_works_count`.
