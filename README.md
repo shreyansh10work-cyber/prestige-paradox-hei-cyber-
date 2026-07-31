@@ -37,11 +37,12 @@ A dataset of 741 universities across 67 countries was built from 552,860 raw GDE
 
 | File | Description |
 |------|-------------|
-| `Codebook.ipynb` | Main analytical notebook: GDELT extraction, cleaning, OpenAlex merge, regression, and figures. |
-| `Codebook 2.0.ipynb` | Revised / extended notebook. |
-| `Big Query SQL script` | BigQuery extraction query for the GDELT GKG pull. |
+| `analysis_main.ipynb` | Produces Figures [FILL IN: the 9 figure numbers]. Core pipeline: GDELT extraction, cleaning, OpenAlex merge, Negative Binomial regression, and main visualisations. |
+| `analysis_supplementary.ipynb` | Produces Figures [FILL IN: the 2 figure numbers]. [FILL IN: one-line reason they are separate, e.g. "generated from a separate dataframe"]. |
+| `gdelt_extraction.sql` | BigQuery extraction query for the GDELT GKG pull. |
 | `gdelt_cleaned_dataset.csv` | Cleaned GDELT event dataset (pre-merge). |
 | `prestige_paradox_dataset_741.csv` | Final 741-university analytical dataset used for every reported result. |
+| `requirements.txt` | Python package dependencies. |
 | `README.md` | This file. |
 
 ---
