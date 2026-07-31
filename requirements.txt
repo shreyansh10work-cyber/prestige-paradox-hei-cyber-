@@ -1,0 +1,9 @@
+pandas
+numpy
+statsmodels
+thefuzz
+requests
+matplotlib
+seaborn
+scipy
+google-cloud-bigquery
