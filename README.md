@@ -4,7 +4,7 @@
 
 ### Institutional Bibliometric Status and Cybersecurity Media Salience in Global Higher Education, 2020–2024
 
-*MSc Business Analytics Dissertation · University of Greenwich*
+*MSc Business Analytics Project · University of Greenwich*
 
 ![Python](https://img.shields.io/badge/Python-3.x-3776AB?style=flat-square&logo=python&logoColor=white)
 ![BigQuery](https://img.shields.io/badge/GDELT-BigQuery-4285F4?style=flat-square&logo=googlecloud&logoColor=white)
