@@ -94,7 +94,7 @@ The US contributes **385 of 741** universities (**51.9%**), partly reflecting GD
 <td width="50%" valign="top">
 
 ### 🧭 Honestly Bounded
-The 3+ minimum-frequency filter left-truncates the sample — the headline IRR most plausibly **overstates** the true population effect. Adding research volume fails to converge (r = 0.985 collinearity), leaving impact-vs-volume unresolved.
+The 3+ minimum-frequency filter left-truncates the sample - the headline IRR most plausibly **overstates** the true population effect. Adding research volume fails to converge (r = 0.985 collinearity), leaving impact-vs-volume unresolved.
 
 </td>
 </tr>
@@ -106,7 +106,7 @@ The 3+ minimum-frequency filter left-truncates the sample — the headline IRR m
 
 | File | Description |
 |:--|:--|
-| 📓 `analysis_main.ipynb` | Core pipeline — GDELT extraction, cleaning, OpenAlex merge, Negative Binomial regression, main visualisations |
+| 📓 `analysis_main.ipynb` | Core pipeline - GDELT extraction, cleaning, OpenAlex merge, Negative Binomial regression, main visualisations |
 | 📓 `analysis_supplementary.ipynb` | Supplementary figures |
 | 🗃️ `gdelt_extraction.sql` | BigQuery extraction query for the GDELT GKG pull |
 | 📄 `gdelt_cleaned_dataset.csv` | Cleaned GDELT event dataset (pre-merge) |
@@ -158,7 +158,7 @@ flowchart TD
 <summary><b>🔍 Why 741 and not 742?</b></summary>
 <br>
 
-The pre-merge file had 742 rows. Manual validation identified one false merge — seven unrelated GDELT name-fragments had collapsed onto a single OpenAlex record (*He University*), attributing 32 spurious events to it. Removing it gives the analytical **N = 741**.
+The pre-merge file had 742 rows. Manual validation identified one false merge - seven unrelated GDELT name-fragments had collapsed onto a single OpenAlex record (*He University*), attributing 32 spurious events to it. Removing it gives the analytical **N = 741**.
 
 </details>
 
@@ -193,12 +193,12 @@ pip install pandas numpy statsmodels thefuzz requests matplotlib seaborn scipy g
 
 | # | Limitation |
 |:--:|:--|
-| 1 | **Left-truncation bias** — the 3+ frequency filter admits only media-visible universities, so the estimated prestige gradient likely overstates the population effect |
+| 1 | **Left-truncation bias** - the 3+ frequency filter admits only media-visible universities, so the estimated prestige gradient likely overstates the population effect |
 | 2 | **300 unmatched universities (23.4%)** excluded at the merge stage; direction of resulting bias cannot be verified from available data |
-| 3 | **GDELT English-language bias** — non-Anglophone institutions are under-represented |
-| 4 | **Cumulative citations** — `cited_by_count` is all-time as of June 2025, not bounded to 2020–2024 |
-| 5 | **Cross-sectional design** — no causal direction can be established |
-| 6 | **Pseudo R² = 0.075** — prestige and country explain roughly 7.5% of deviance |
+| 3 | **GDELT English-language bias** - non-Anglophone institutions are under-represented |
+| 4 | **Cumulative citations** - `cited_by_count` is all-time as of June 2025, not bounded to 2020–2024 |
+| 5 | **Cross-sectional design** - no causal direction can be established |
+| 6 | **Pseudo R² = 0.075** - prestige and country explain roughly 7.5% of deviance |
 
 ---
 
